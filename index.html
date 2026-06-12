@@ -17,7 +17,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow: hidden; }
 
   body {
     background: var(--bg);
@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(20px, 4vh, 36px);
+    gap: clamp(14px, 3.2vh, 32px);
     max-width: 640px;
     width: 100%;
     max-width: 100%;
@@ -88,7 +88,7 @@
   }
 
   .logo svg {
-    width: clamp(58px, 11vw, 84px);
+    width: min(clamp(58px, 11vw, 84px), 10vh);
     height: auto;
     display: block;
     overflow: visible;
@@ -117,7 +117,7 @@
   .wordmark {
     font-family: "Syne", sans-serif;
     font-weight: 700;
-    font-size: clamp(28px, 5.4vw, 44px);
+    font-size: min(clamp(28px, 5.4vw, 44px), 5.5vh);
     letter-spacing: -0.02em;
     line-height: 1;
     color: var(--text);
@@ -127,7 +127,7 @@
   .headline {
     font-family: "Syne", sans-serif;
     font-weight: 700;
-    font-size: clamp(56px, 18vw, 140px);
+    font-size: min(clamp(56px, 18vw, 140px), 20vh);
     line-height: 0.92;
     letter-spacing: -0.035em;
     color: var(--text);
@@ -137,7 +137,7 @@
   .subline {
     font-family: "Manrope", sans-serif;
     font-weight: 500;
-    font-size: clamp(16px, 2.4vw, 21px);
+    font-size: min(clamp(16px, 2.4vw, 21px), 2.6vh);
     line-height: 1.5;
     color: rgba(224, 247, 245, 0.78);
     max-width: 30ch;
