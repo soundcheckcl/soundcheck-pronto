@@ -17,7 +17,9 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body { height: 100%; overflow: hidden; }
+  /* La página ocupa la pantalla completa, pero si el contenido no cabe
+     (celulares bajos) se permite bajar con el dedo en vez de cortarlo. */
+  html, body { min-height: 100%; }
 
   body {
     background: var(--bg);
@@ -30,8 +32,13 @@
     justify-content: center;
     text-align: center;
     padding: clamp(24px, 5vw, 56px);
+    /* Abajo se reserva el alto del pie (que va fijo al fondo) para que nunca
+       quede encima del botón de Instagram en pantallas chicas. */
+    padding-bottom: max(clamp(24px, 5vw, 56px), calc(clamp(18px, 4vh, 34px) + 36px));
     position: relative;
-    overflow: hidden;
+    /* Solo se oculta el desborde lateral (brillo de fondo); el vertical se
+       permite para poder bajar si el contenido no cabe. */
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -144,14 +151,65 @@
     text-wrap: balance;
   }
 
-  .tagline {
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 500;
-    font-size: clamp(13px, 1.8vw, 16px);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-top: clamp(2px, 1vh, 8px);
+  /* ---- Fecha de lanzamiento ----
+     Mismo tamaño del párrafo, pero con el color de texto pleno y un peso más
+     para que destaque un poco sin agregar colores nuevos. */
+  .launch {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: min(clamp(17px, 2.6vw, 22px), 2.8vh);
+    line-height: 1.4;
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  /* ---- Llamado a inscribirse en el directorio ----
+     Agrupa la pregunta, el botón principal y el de Instagram con menos
+     separación entre ellos, para que se lean como un solo bloque. */
+  .cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.8vh, 16px);
+    margin-top: clamp(4px, 1.2vh, 12px);
+  }
+
+  .cta-question {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: min(clamp(16px, 2.2vw, 19px), 2.6vh);
+    line-height: 1.4;
+    color: var(--text);
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+
+  /* Botón principal: relleno con el acento de la página y texto en el color
+     del fondo (contraste ~7:1, legible). Abre en la misma pestaña a propósito. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: clamp(16px, 1.9vw, 18px);
+    color: var(--bg);
+    background-color: var(--teal);
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 999px;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 24px rgba(20, 184, 166, 0.32);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
   }
 
   /* ---- Instagram link ---- */
@@ -217,18 +275,24 @@
 
     <h1 class="headline" style="font-weight: 700">Pronto.</h1>
 
+    <p class="launch">Lanzamos a principios de diciembre.</p>
+
     <p class="subline">Estamos construyendo el lugar donde los músicos encuentran todo lo que necesitan para sonar mejor. Técnicos, profes y salas de ensayo, en un solo lugar.</p>
 
-    <p class="tagline">Suena bien.</p>
+    <div class="cta">
+      <p class="cta-question">¿Ofreces clases, mantención o sala de ensayo?</p>
 
-    <a class="ig" href="https://instagram.com/getsoundcheck" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5.5" />
-        <circle cx="12" cy="12" r="4.2" />
-        <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
-      </svg>
-      @getsoundcheck
-    </a>
+      <a class="btn-primary" href="https://directorio.soundcheck.cl/inscripcion">Inscríbete</a>
+
+      <a class="ig" href="https://instagram.com/getsoundcheck" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5.5" />
+          <circle cx="12" cy="12" r="4.2" />
+          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
+        </svg>
+        @getsoundcheck
+      </a>
+    </div>
   </main>
 
   <footer>
