@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "https://directorio.soundcheck.cl/",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "destination": "https://directorio.soundcheck.cl/",
       "permanent": false
